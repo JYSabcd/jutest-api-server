@@ -65,8 +65,9 @@ api.get('/api/PlayerRoaster', async c => {
     const url = new URL("https://stats.nba.com/stats/commonteamroster?LeagueID=00")
     url.searchParams.append('Season', reqUrl.searchParams.get('Season') ?? '')
     url.searchParams.append('TeamID', reqUrl.searchParams.get('TeamID') ?? '')
-
+    console.log(url)
     const res = await fetch(url , headersOption);
+    console.log('완료');
     const ResJson = await res.json();
 
     //console.log(ResJson);
