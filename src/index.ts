@@ -9,6 +9,9 @@ import playerranking from './playerranking'
 import showsimilarplayers from './showsimilarplayers'
 import teamranking from './teamranking'
 import timeformatch from './timeformatch'
+import dotenv from 'dotenv'
+import fs from 'fs'
+dotenv.config()
 
 const app = new Hono()
 app.use('*', cors())
@@ -23,8 +26,12 @@ app.route('/playerranking', playerranking)
 app.route('/showsimilarplayers', showsimilarplayers)
 app.route('/teamranking', teamranking)
 app.route('/timeformatch', timeformatch)
-
 serve({
     fetch:app.fetch,
-    port:3000
+    port:3000,
+    ...(process.env.DEV !== 'TRUE' ? {serverOptions:{
+        ca:fs.readFileSync('/etc/letsencrypt/live/nba-project.kro.kr/fullchain.pem'),
+        key:fs.readFileSync('/etc/letsencrypt/live/nba-project.kro.kr/privkey.pem'),
+        cert:fs.readFileSync('/etc/letsencrypt/live/nba-project.kro.kr/cert.pem')
+    }}:{})
 })
