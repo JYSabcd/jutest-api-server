@@ -1,6 +1,8 @@
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
+import dotenv from 'dotenv'
+dotenv.config()
 import compareplayer from './compareplayer'
 import home from './home'
 import playerinformation from './playerinformation'
@@ -9,9 +11,7 @@ import playerranking from './playerranking'
 import showsimilarplayers from './showsimilarplayers'
 import teamranking from './teamranking'
 import timeformatch from './timeformatch'
-import dotenv from 'dotenv'
 import fs from 'fs'
-dotenv.config()
 
 const app = new Hono()
 app.use('*', cors())
