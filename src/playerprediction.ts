@@ -5,7 +5,7 @@ const { Pool } = pg;
 
 const api = new Hono()
 
-api.get('/api/MainPlayer1', async c => {
+api.get('/api/Mainplayer1', async c => {
     const reqUrl = new URL(c.req.url)
     const url = new URL("https://stats.nba.com/stats/commonplayerinfo?")
     url.searchParams.append('PlayerID', reqUrl.searchParams.get('PlayerID') ?? '')
@@ -17,7 +17,7 @@ api.get('/api/MainPlayer1', async c => {
     //console.log(ResJson.resultSets[0].headers);
     // console.log(ResJson.resultSets[0].rowSet);
 
-    const rowSet = ResJson.resultSets[0].rowSet;
+    const rowSet:(number|string) = ResJson.resultSets[0].rowSet;
     const ReturnData: (number|string)[] = [];
 
     //  rowSet 에서 첫 배열 값만 사용한다. api 호출이 정상이라면 값은 한 개 다.
@@ -29,7 +29,7 @@ api.get('/api/MainPlayer1', async c => {
     return c.json(ReturnData);
 })
 
-api.get('/api/MainPlayer2', async c => {
+api.get('/api/Mainplayer2', async c => {
     const reqUrl = new URL(c.req.url)
     const url = new URL("https://stats.nba.com/stats/playerdashboardbygeneralsplits?LastNGames=0&LeagueID=00&MeasureType=Base&Month=0&OpponentTeamID=0&PaceAdjust=N&Period=0&PerMode=PerGame&PlusMinus=N&PORound=0&Rank=N&SeasonType=Regular+Season&Split=general")
     url.searchParams.append('Season', reqUrl.searchParams.get('Season') ?? '')

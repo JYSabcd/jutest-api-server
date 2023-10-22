@@ -17,13 +17,24 @@ export const headersOption:RequestInit = {
 };
 
 
+// const config = {
+//     host: process.env.DBconfig_host ?? '',
+//     user: process.env.DBconfig_user ?? '',
+//     password: process.env.DBconfig_password ?? '',
+//     database: process.env.DBconfig_database ?? '',
+//     port: isNaN(Number(process.env.DBconfig_port)) ? 5432 : Number(process.env.DBconfig_port),
+//     ssl: false
+// };
+
 const config = {
-    host: process.env.DBconfig_host ?? '',
-    user: process.env.DBconfig_user ?? '',
-    password: process.env.DBconfig_password ?? '',
-    database: process.env.DBconfig_database ?? '',
-    port: isNaN(Number(process.env.DBconfig_port)) ? 5432 : Number(process.env.DBconfig_port),
+    host: 'nba-project.kro.kr',
+    user: 'jys0521',
+    password: 'abcdxyz',
+    database: 'nbadb',
+    port: 5432,
     ssl: false
 };
 
-export const pool = new Pool(config)
+// console.log(process.env.DBconfig_host);
+
+export const pool = new Pool(config);

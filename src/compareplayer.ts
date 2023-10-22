@@ -57,7 +57,7 @@ api.get('/api/playerstats', async c => {
     return c.json(ReturnData);
 })
 
-api.get('/api/playerstats', async c => {
+api.get('/api/playerstatsaverage', async c => {
     const reqUrl = new URL(c.req.url)
     const url = new URL("https://stats.nba.com/stats/leaguedashplayerstats?LastNGames=0&LeagueID=00&MeasureType=Base&Month=0&OpponentTeamID=0&PaceAdjust=N&Period=0&PerMode=PerGame&PlusMinus=N&PORound=0&Rank=N&SeasonType=Regular+Season&TeamID=0&TwoWay=0")
     url.searchParams.append('Season', reqUrl.searchParams.get('Season') ?? '')
@@ -81,10 +81,11 @@ api.get('/api/playerstats', async c => {
         PlayerCount += 1; // 선수가 들어올 때 한명씩 더함
     }
 
-    return c.json(ReturnData.map(v => v.toFixed(1)));
+    if(PlayerCount === 0){
+        return c.json(ReturnData.map(v => (v).toFixed(1)));
+    } else{
+        return c.json(ReturnData.map(v => (v/PlayerCount).toFixed(1)));
+    }
 })
-
-
-
 
 export default api

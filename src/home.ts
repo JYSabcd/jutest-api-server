@@ -70,8 +70,9 @@ api.get('/api/leaguedashplayerstats', async c => {
     return c.json(TableData);
 })
 
+
 api.get('/db/getschedule', async c => {
-    const url = new URL(c.req.url)
+    const url = new URL(c.req.url);
     const connectToDB = await pool.connect();
 
     let query = `select * from public.game_schedule where game_date = '${url.searchParams.get("SelectedDate")}';`;
